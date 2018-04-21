@@ -1,8 +1,25 @@
-val akkaVersion = "2.5.8"
+lazy val root = (project in file("."))
+  .settings(
+    name := "akka-cluster",
+    version := "0.1",
+    organization := "pl.slowikps",
+    scalaVersion := "2.12.5",
+    libraryDependencies ++= dependencies,
+    scalacOptions ++= compilerOptions
+  )
 
-organization := "pl.slowikps"
-scalaVersion := "2.12.4"
-scalacOptions ++= Seq(
+val dependencies = Seq(
+  "com.typesafe.akka" %% "akka-actor",
+  "com.typesafe.akka" %% "akka-remote",
+  "com.typesafe.akka" %% "akka-cluster-metrics",
+  "com.typesafe.akka" %% "akka-cluster",
+  "com.typesafe.akka" %% "akka-cluster-tools",
+  "com.typesafe.akka" %% "akka-actor-typed",
+  "com.typesafe.akka" %% "akka-cluster-typed",
+  "com.typesafe.akka" %% "akka-multi-node-testkit"
+) map (_ % "2.5.12")
+
+val compilerOptions = Seq(
   "-deprecation", // Emit warning and location for usages of deprecated APIs.
   "-encoding",
   "utf-8", // Specify character encoding used by source files.
@@ -50,13 +67,3 @@ scalacOptions ++= Seq(
   "-Ywarn-unused:privates", // Warn if a private member is unused.
   "-Ywarn-value-discard" // Warn when non-Unit expression results are unused.
 )
-
-libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-actor" % akkaVersion,
-  "com.typesafe.akka" %% "akka-remote" % akkaVersion,
-  "com.typesafe.akka" %% "akka-cluster" % akkaVersion,
-  "com.typesafe.akka" %% "akka-cluster-metrics" % akkaVersion,
-  "com.typesafe.akka" %% "akka-cluster-tools" % akkaVersion,
-  "com.typesafe.akka" %% "akka-multi-node-testkit" % akkaVersion
-)
-
