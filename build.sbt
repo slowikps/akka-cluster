@@ -4,22 +4,30 @@ lazy val root = (project in file("."))
     version := "0.1",
     organization := "pl.slowikps",
     scalaVersion := "2.12.5",
-    libraryDependencies ++= dependencies,
+    libraryDependencies ++= akkaDependencies ++ otherDependencies,
     scalacOptions ++= compilerOptions
   )
 
-val dependencies = Seq(
-  "com.typesafe.akka" %% "akka-actor",
-  "com.typesafe.akka" %% "akka-remote",
-  "com.typesafe.akka" %% "akka-cluster-metrics",
-  "com.typesafe.akka" %% "akka-cluster",
-  "com.typesafe.akka" %% "akka-cluster-tools",
-  "com.typesafe.akka" %% "akka-actor-typed",
-  "com.typesafe.akka" %% "akka-cluster-typed",
-  "com.typesafe.akka" %% "akka-multi-node-testkit"
-) map (_ % "2.5.12")
+val akkaDependencies = {
+  val version = "2.5.12"
+  Seq(
+    "com.typesafe.akka" %% "akka-actor"              % version,
+    "com.typesafe.akka" %% "akka-remote"             % version,
+    "com.typesafe.akka" %% "akka-cluster-metrics"    % version,
+    "com.typesafe.akka" %% "akka-cluster"            % version,
+    "com.typesafe.akka" %% "akka-cluster-tools"      % version,
+    "com.typesafe.akka" %% "akka-actor-typed"        % version,
+    "com.typesafe.akka" %% "akka-cluster-typed"      % version,
+    "com.typesafe.akka" %% "akka-multi-node-testkit" % version,
+    "com.typesafe.akka" %% "akka-testkit-typed"      % version % Test
+  )
+}
 
-val compilerOptions = Seq(
+val otherDependencies = Seq(
+  "org.scalatest" %% "scalatest" % "3.0.1" % "test"
+)
+val compilerOptions: Seq[String] = Seq()
+val compilerOptions2: Seq[String] = Seq(
   "-deprecation", // Emit warning and location for usages of deprecated APIs.
   "-encoding",
   "utf-8", // Specify character encoding used by source files.
