@@ -22,9 +22,9 @@ object Game {
 
   def startGame(player1: ActorRef[Status], player2: ActorRef[Status]): Behaviors.Receive[Move] = {
     def game(board: Board, activePlayer: ActorRef[Status], nextPlayer: ActorRef[Status]): Behaviors.Receive[Move] = {
-      Behaviors.receive { (_, msg) =>
-        if (msg.sender == activePlayer) {
-          board.move(msg.row, msg.column, activePlayer == player1) match {
+      Behaviors.receive { (_, move) =>
+        if (move.sender == activePlayer) {
+          board.move(move.row, move.column, activePlayer == player1) match {
             case Board.BoardInvalidMove =>
               activePlayer ! InvalidMove
               Behavior.same
@@ -42,7 +42,7 @@ object Game {
               gameEnded(TheEnd(s"The winner is: ${activePlayer.path}"))
           }
         } else {
-          msg.sender ! NotYourMove
+          move.sender ! NotYourMove
           Behavior.same
         }
       }

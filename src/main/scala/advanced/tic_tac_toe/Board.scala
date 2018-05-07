@@ -54,14 +54,14 @@ class Board {
       List(board(2)(0), board(1)(1), board(0)(2)).forall(_ == newValue)
 
   override def toString: String = {
-    def printInt(in: Int) = in match {
+    def printCell(in: Int) = in match {
       case Empty => " "
       case X     => "X"
       case O     => "O"
     }
 
     board.map(
-      _.map(printInt).mkString("|")
+      _.map(printCell).mkString("|")
     ).mkString("\n-----\n")
   }
 
