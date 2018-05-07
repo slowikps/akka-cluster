@@ -8,7 +8,7 @@ object Sending1Actor {
 
 class Sending1Actor extends Actor {
 
-  override def receive = {
+  override def receive: PartialFunction[Any, Unit] = {
     case _ => sender() ! 1
   }
 }

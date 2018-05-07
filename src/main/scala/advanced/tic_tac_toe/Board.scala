@@ -2,7 +2,6 @@ package advanced.tic_tac_toe
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
-import Stream._
 
 object Board {
 
@@ -16,26 +15,24 @@ object Board {
 class Board {
   import Board._
 
-  val board: mutable.Seq[ArrayBuffer[Int]] =
+  private val board: mutable.Seq[ArrayBuffer[Int]] =
     ArrayBuffer(
       ArrayBuffer(0, 0, 0),
       ArrayBuffer(0, 0, 0),
       ArrayBuffer(0, 0, 0)
     )
 
-  val X = 1
-  val O = 2
+  private val Empty = 0
+  private val X     = 1
+  private val O     = 2
 
   def move(row: Int, column: Int, isX: Boolean): BoardStatus = {
     def move(row: Int, column: Int): BoardStatus = {
-      if (board(row)(column) == 0) {
+      if (board(row)(column) == Empty) {
         val newValue = if (isX) X else O
         board(row)(column) = newValue
 
-        val tmp: Seq[Boolean] =
-          checkRow(row, newValue) #:: checkColumn(column, newValue) #:: checkDiagonal(newValue) #:: empty[Boolean]
-
-        if (tmp.exists(x => x))
+        if (checkRow(row, newValue) || checkColumn(column, newValue) || checkDiagonal(newValue))
           Win
         else if (inGame()) InGame
         else Tie
@@ -44,7 +41,7 @@ class Board {
     move(row - 1, column - 1)
   }
 
-  private def inGame(): Boolean = board.flatten.contains(0)
+  private def inGame(): Boolean = board.flatten.contains(Empty)
 
   private def checkRow(row: Int, newValue: Int): Boolean =
     board(row).forall(_ == newValue)
@@ -55,5 +52,17 @@ class Board {
   private def checkDiagonal(newValue: Int): Boolean =
     List(board(0)(0), board(1)(1), board(2)(2)).forall(_ == newValue) ||
       List(board(2)(0), board(1)(1), board(0)(2)).forall(_ == newValue)
+
+  override def toString: String = {
+    def printInt(in: Int) = in match {
+      case Empty => " "
+      case X     => "X"
+      case O     => "O"
+    }
+
+    board.map(
+      _.map(printInt).mkString("|")
+    ).mkString("\n-----\n")
+  }
 
 }
