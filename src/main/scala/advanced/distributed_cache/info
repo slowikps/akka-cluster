@@ -1,1 +1,5 @@
+https://doc.akka.io/docs/akka/current/distributed-data.html?language=java#data-types
+
 - pods discovery withing k8
+- would it be easier to just use cluster singleton to manage cache?
+- You may also register interest in change notifications by sending Replicator.Subscribe message to the Replicator. It will send Replicator.Changed messages to the registered subscriber when the data for the subscribed key is updated. Subscribers will be notified periodically with the configured notify-subscribers-interval, and it is also possible to send an explicit Replicator.FlushChanges message to the Replicator to notify the subscribers immediately.
