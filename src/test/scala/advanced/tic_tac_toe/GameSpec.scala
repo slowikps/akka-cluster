@@ -1,10 +1,9 @@
 package advanced.tic_tac_toe
 
 import advanced.tic_tac_toe.Game.{Move, Status}
+import akka.actor.testkit.typed.scaladsl.{BehaviorTestKit, TestInbox}
 import akka.actor.typed._
 import akka.actor.typed.scaladsl._
-import akka.testkit.typed.scaladsl.{BehaviorTestKit, TestInbox}
-import akka.testkit.typed.scaladsl.Effects._
 import org.scalatest.{Matchers, WordSpecLike}
 
 class GameSynchronousSpec extends WordSpecLike with Matchers {

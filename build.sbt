@@ -9,17 +9,19 @@ lazy val root = (project in file("."))
   )
 
 val akkaDependencies = {
-  val version = "2.5.12"
+  val version = "2.5.13"
   Seq(
-    "com.typesafe.akka" %% "akka-actor"              % version,
-    "com.typesafe.akka" %% "akka-remote"             % version,
-    "com.typesafe.akka" %% "akka-cluster-metrics"    % version,
-    "com.typesafe.akka" %% "akka-cluster"            % version,
-    "com.typesafe.akka" %% "akka-cluster-tools"      % version,
-    "com.typesafe.akka" %% "akka-actor-typed"        % version,
-    "com.typesafe.akka" %% "akka-cluster-typed"      % version,
-    "com.typesafe.akka" %% "akka-multi-node-testkit" % version,
-    "com.typesafe.akka" %% "akka-testkit-typed"      % version % Test
+    "com.typesafe.akka" %% "akka-actor"               % version,
+    "com.typesafe.akka" %% "akka-remote"              % version,
+    "com.typesafe.akka" %% "akka-cluster-metrics"     % version,
+    "com.typesafe.akka" %% "akka-cluster"             % version,
+    "com.typesafe.akka" %% "akka-cluster-tools"       % version,
+    "com.typesafe.akka" %% "akka-actor-typed"         % version,
+    "com.typesafe.akka" %% "akka-cluster-typed"       % version,
+    "com.typesafe.akka" %% "akka-multi-node-testkit"  % version,
+    "com.typesafe.akka" %% "akka-stream"              % version,
+    "com.typesafe.akka" %% "akka-http"                % "10.1.3",
+    "com.typesafe.akka" %% "akka-actor-testkit-typed" % version % Test
   )
 }
 
